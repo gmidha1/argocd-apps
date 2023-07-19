@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mgdclusterset
+  namespace: openshift-gitops
+spec:
+  destination:
+    name: ''
+    namespace: mgdclusterset
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: managedclusters
+    repoURL: 'https://github.com/gmidha1/argocd-apps'
+    targetRevision: HEAD
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+    syncOptions:
+    - CreateNamespace=true
